@@ -31,7 +31,6 @@ public class ProductsService implements IProductsService{
         product.setQuantity(request.getQuantity());
         product.setType(request.getType());
         this.productsDAO.saveOrUpdate(product);
-        //asd
     }
 
     @Override
