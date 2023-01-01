@@ -2,6 +2,7 @@ package com.firm.management.Service;
 
 import com.firm.management.DAO.IProductsDAO;
 import com.firm.management.Entity.Products;
+import com.firm.management.Entity.Users;
 import com.firm.management.Request.SaveOrUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,14 @@ public class ProductsService implements IProductsService{
 
     @Override
     @Transactional
-    public List<Products> getAll() {
-        return this.productsDAO.getAll();
+    public List<Products> getAllProducts() {
+        return this.productsDAO.getAllProducts();
+    }
+
+    @Override
+    @Transactional
+    public List<Users> getAllUsers() {
+        return this.productsDAO.getAllUsers();
     }
 
     @Override

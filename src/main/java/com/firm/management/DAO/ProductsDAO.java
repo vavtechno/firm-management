@@ -1,6 +1,7 @@
 package com.firm.management.DAO;
 
 import com.firm.management.Entity.Products;
+import com.firm.management.Entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,16 @@ public class ProductsDAO implements IProductsDAO{
 
     @Override
     @Transactional
-    public List<Products> getAll() {
+    public List<Products> getAllProducts() {
         Session session = entityManager.unwrap(Session.class);
         return session.createQuery("from Products ").getResultList();
     }
-
+    @Override
+    @Transactional
+    public List<Users> getAllUsers() {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from Users ").getResultList();
+    }
     @Override
     public void saveOrUpdate(Products product) {
         try{

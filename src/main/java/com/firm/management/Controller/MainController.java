@@ -1,6 +1,7 @@
 package com.firm.management.Controller;
 
 import com.firm.management.Entity.Products;
+import com.firm.management.Entity.Users;
 import com.firm.management.Request.SaveOrUpdateRequest;
 import com.firm.management.Service.IProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,11 @@ public class MainController {
 
     @GetMapping("/products")
     public List<Products> products() {
-        return productsService.getAll();
+        return productsService.getAllProducts();
+    }
+    @GetMapping("/users")
+    public List<Users> users() {
+        return productsService.getAllUsers();
     }
 
     @PostMapping("/saveOrUpdate")
