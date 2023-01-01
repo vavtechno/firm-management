@@ -1,7 +1,6 @@
 package com.firm.management.DAO;
 
-import com.firm.management.Entity.Products;
-import com.firm.management.Entity.Users;
+import com.firm.management.Entity.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 @Repository
-public class ProductsDAO implements IProductsDAO{
+public class ProductsDAO implements IProductsDAO {
 
     private EntityManager entityManager;
 
@@ -33,6 +33,26 @@ public class ProductsDAO implements IProductsDAO{
         Session session = entityManager.unwrap(Session.class);
         return session.createQuery("from Users ").getResultList();
     }
+
+    @Override
+    @Transactional
+    public List<ProductDetail> getAllProductDetail() {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from ProductDetail ").getResultList();
+    }
+    @Override
+    @Transactional
+    public List<Customer> getAllCustomer() {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from Customer ").getResultList();
+    }
+    @Override
+    @Transactional
+    public List<Order> getAllOrder() {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from Orders ").getResultList();
+    }
+
     @Override
     public void saveOrUpdate(Products product) {
         try{

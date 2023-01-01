@@ -1,21 +1,22 @@
 package com.firm.management.Service;
 
 import com.firm.management.DAO.IProductsDAO;
-import com.firm.management.Entity.Products;
-import com.firm.management.Entity.Users;
+import com.firm.management.Entity.*;
 import com.firm.management.Request.SaveOrUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 @Service
-public class ProductsService implements IProductsService{
+public abstract class ProductsService implements IProductsService {
     private final IProductsDAO productsDAO;
 
     public ProductsService(IProductsDAO productsDAO) {
         this.productsDAO = productsDAO;
     }
+
 
     @Override
     @Transactional
@@ -27,6 +28,24 @@ public class ProductsService implements IProductsService{
     @Transactional
     public List<Users> getAllUsers() {
         return this.productsDAO.getAllUsers();
+    }
+
+    @Override
+    @Transactional
+    public List<ProductDetail> getAllProductDetail() {
+        return this.productsDAO.getAllProductDetail();
+    }
+
+    @Override
+    @Transactional
+    public List<Customer> getAllCustomer() {
+        return this.productsDAO.getAllCustomer();
+    }
+
+    @Override
+    @Transactional
+    public List<Order> getAllOrder() {
+        return this.productsDAO.getAllOrder();
     }
 
     @Override
@@ -48,7 +67,7 @@ public class ProductsService implements IProductsService{
 
     @Override
     @Transactional
-    public void delete(String  id) {
+    public void delete(String id) {
         this.productsDAO.deleteById(id);
     }
 }
