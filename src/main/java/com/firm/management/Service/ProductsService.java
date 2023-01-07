@@ -1,8 +1,9 @@
 package com.firm.management.Service;
 
 import com.firm.management.DAO.IProductsDAO;
-import com.firm.management.Entity.Products;
-import com.firm.management.Entity.Users;
+import com.firm.management.Entity.*;
+import com.firm.management.Request.AcademicProgramByIdRequest;
+import com.firm.management.Request.CalendarSaveOrUpdateRequest;
 import com.firm.management.Request.SaveOrUpdateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,41 @@ public class ProductsService implements IProductsService{
     @Transactional
     public List<Users> getAllUsers() {
         return this.productsDAO.getAllUsers();
+    }
+
+    @Override
+    @Transactional
+    public List<Customer> getAllCustomer() {
+        return this.productsDAO.getAllCustomer();
+    }
+
+    @Override
+    @Transactional
+    public List<Orders> getAllOrders() {
+        return this.productsDAO.getAllOrders();
+    }
+
+    @Override
+    @Transactional
+    public List<AcademicProgram> getAllAcademicProgram() {
+        return this.productsDAO.getAllAcademicProgram();
+    }
+
+    @Override
+    @Transactional
+    public List<AcademicProgram> getAcademicProgramByClassService(AcademicProgramByIdRequest request) {
+        return this.productsDAO.getAcademicProgramByClassDAO(request.getClassCode());
+    }
+
+    @Override
+    @Transactional
+    public void saveOrUpdateToCalendar(CalendarSaveOrUpdateRequest request) {
+        AcademicProgram academicProgram = new AcademicProgram();
+        academicProgram.setClasses(request.getClasses());
+        academicProgram.setDays(request.getDays());
+        academicProgram.setLessons(request.getLessons());
+        academicProgram.setHours(request.getHours());
+        this.productsDAO.saveOrUpdateToCalendar(academicProgram);
     }
 
     @Override

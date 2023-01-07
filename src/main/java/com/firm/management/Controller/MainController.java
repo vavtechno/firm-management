@@ -1,7 +1,8 @@
 package com.firm.management.Controller;
 
-import com.firm.management.Entity.Products;
-import com.firm.management.Entity.Users;
+import com.firm.management.Entity.*;
+import com.firm.management.Request.AcademicProgramByIdRequest;
+import com.firm.management.Request.CalendarSaveOrUpdateRequest;
 import com.firm.management.Request.SaveOrUpdateRequest;
 import com.firm.management.Service.IProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,31 @@ public class MainController {
     @GetMapping("/users")
     public List<Users> users() {
         return productsService.getAllUsers();
+    }
+
+    @GetMapping("/customer")
+    public List<Customer> customer() {
+        return productsService.getAllCustomer();
+    }
+
+    @GetMapping("/orders")
+    public List<Orders> orders() {
+        return productsService.getAllOrders();
+    }
+
+    @GetMapping("/academic_program")
+    public List<AcademicProgram> academic_program() {
+        return productsService.getAllAcademicProgram();
+    }
+
+    @PostMapping("/academicProgramByClass")
+    public List<AcademicProgram> academicProgramByClass(@RequestBody AcademicProgramByIdRequest request) {
+        return productsService.getAcademicProgramByClassService(request);
+    }
+
+    @PostMapping("/saveOrUpdateToCalendar")
+    public void saveOrUpdateToCalendar(@RequestBody CalendarSaveOrUpdateRequest request) {
+         productsService.saveOrUpdateToCalendar(request);
     }
 
     @PostMapping("/saveOrUpdate")

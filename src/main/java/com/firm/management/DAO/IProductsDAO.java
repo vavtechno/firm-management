@@ -1,7 +1,6 @@
 package com.firm.management.DAO;
 
-import com.firm.management.Entity.Products;
-import com.firm.management.Entity.Users;
+import com.firm.management.Entity.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,7 +9,13 @@ import java.util.List;
 public interface IProductsDAO {
     List<Products> getAllProducts();
     List<Users> getAllUsers();
+    List<Customer> getAllCustomer();
+    List<Orders> getAllOrders();
+    List<AcademicProgram> getAllAcademicProgram();
     void saveOrUpdate(Products product);
     void update(Products product);
     void deleteById(String  id);
+    void saveOrUpdateToCalendar(AcademicProgram program);
+
+    List<AcademicProgram> getAcademicProgramByClassDAO(String classCode);
 }
