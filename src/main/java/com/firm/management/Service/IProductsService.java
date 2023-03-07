@@ -1,9 +1,7 @@
 package com.firm.management.Service;
 
 import com.firm.management.Entity.*;
-import com.firm.management.Request.AcademicProgramByIdRequest;
-import com.firm.management.Request.CalendarSaveOrUpdateRequest;
-import com.firm.management.Request.SaveOrUpdateRequest;
+import com.firm.management.Request.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +22,7 @@ public interface IProductsService {
     void delete(String id);
 
     List<AcademicProgram> getAcademicProgramByClassService(AcademicProgramByIdRequest request);
+    List<Orders> getOrdersByBrandService(OrdersByBrandRequest request);
+    List<Products> getProductsByColor(ProductsByColorRequest request);
+    List<Users> getUsersByTitleService(UsersByTitleRequest request);
 }

@@ -61,6 +61,32 @@ public class ProductsDAO implements IProductsDAO{
         return  q.list();
 
     }
+    @Override
+    public List<Orders> getOrdersByBrand(String brandName) {
+        Session session = entityManager.unwrap(Session.class);
+        brandName="%"+brandName+"%";
+        Query q = session.createNativeQuery("select * from orders where brand like ?1");
+        q.setParameter(1, brandName);
+        return  q.list();
+
+    }
+    @Override
+    public List<Users> getUsersByTitle(String title) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("select * from users where title=?1");
+        q.setParameter(1, title);
+        return  q.list();
+
+    }
+
+    @Override
+    public List<Products> getProductsDAO(String color) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("select * from products where color=?1");
+        q.setParameter(1, color);
+        return  q.list();
+
+    }
 
     @Override
     public void saveOrUpdate(Products product) {

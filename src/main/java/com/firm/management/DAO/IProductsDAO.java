@@ -1,6 +1,7 @@
 package com.firm.management.DAO;
 
 import com.firm.management.Entity.*;
+import com.firm.management.Request.OrdersByBrandRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,9 @@ public interface IProductsDAO {
     void saveOrUpdateToCalendar(AcademicProgram program);
 
     List<AcademicProgram> getAcademicProgramByClassDAO(String classCode);
+    List<Orders> getOrdersByBrand(String brandName);
+
+    List<Products> getProductsDAO(String color);
+    List<Users> getUsersByTitle(String title);
+
 }

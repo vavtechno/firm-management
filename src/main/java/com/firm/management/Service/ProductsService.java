@@ -2,9 +2,7 @@ package com.firm.management.Service;
 
 import com.firm.management.DAO.IProductsDAO;
 import com.firm.management.Entity.*;
-import com.firm.management.Request.AcademicProgramByIdRequest;
-import com.firm.management.Request.CalendarSaveOrUpdateRequest;
-import com.firm.management.Request.SaveOrUpdateRequest;
+import com.firm.management.Request.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +50,23 @@ public class ProductsService implements IProductsService{
     @Transactional
     public List<AcademicProgram> getAcademicProgramByClassService(AcademicProgramByIdRequest request) {
         return this.productsDAO.getAcademicProgramByClassDAO(request.getClassCode());
+    }
+    @Override
+    @Transactional
+    public List<Products> getProductsByColor(ProductsByColorRequest request) {
+        return this.productsDAO.getProductsDAO(request.getColor());
+    }
+
+    @Override
+    @Transactional
+    public List<Orders> getOrdersByBrandService(OrdersByBrandRequest request) {
+        return this.productsDAO.getOrdersByBrand(request.getBrandName());
+    }
+
+    @Override
+    @Transactional
+    public List<Users> getUsersByTitleService(UsersByTitleRequest request) {
+        return this.productsDAO.getUsersByTitle(request.getTitle());
     }
 
     @Override

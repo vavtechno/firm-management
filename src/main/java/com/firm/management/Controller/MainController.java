@@ -1,10 +1,9 @@
 package com.firm.management.Controller;
 
 import com.firm.management.Entity.*;
-import com.firm.management.Request.AcademicProgramByIdRequest;
-import com.firm.management.Request.CalendarSaveOrUpdateRequest;
-import com.firm.management.Request.SaveOrUpdateRequest;
+import com.firm.management.Request.*;
 import com.firm.management.Service.IProductsService;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,17 +39,32 @@ public class MainController {
     public List<Orders> orders() {
         return productsService.getAllOrders();
     }
+    
 
     @GetMapping("/academic_program")
     public List<AcademicProgram> academic_program() {
         return productsService.getAllAcademicProgram();
     }
 
+
     @PostMapping("/academicProgramByClass")
     public List<AcademicProgram> academicProgramByClass(@RequestBody AcademicProgramByIdRequest request) {
         return productsService.getAcademicProgramByClassService(request);
     }
 
+    @PostMapping("/ordersByBrand")
+    public List<Orders> ordersByBrand(@RequestBody OrdersByBrandRequest request) {
+        return productsService.getOrdersByBrandService(request);
+    }
+
+    @PostMapping("/productsByColor")
+    public List<Products> productsByColor(@RequestBody ProductsByColorRequest request) {
+        return productsService.getProductsByColor(request);
+    }
+    @PostMapping("/UsersByTitle")
+    public List<Users> UsersByTitle(@RequestBody UsersByTitleRequest request) {
+        return productsService.getUsersByTitleService(request);
+    }
     @PostMapping("/saveOrUpdateToCalendar")
     public void saveOrUpdateToCalendar(@RequestBody CalendarSaveOrUpdateRequest request) {
          productsService.saveOrUpdateToCalendar(request);
@@ -60,6 +74,8 @@ public class MainController {
     public void saveOrUpdate(@RequestBody SaveOrUpdateRequest request) {
         productsService.saveOrUpdate(request);
     }
+
+
 
     @GetMapping("/deleteById/{id}")
     public void saveOrUpdate(@PathVariable String id) {
