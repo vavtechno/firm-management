@@ -21,7 +21,7 @@ public class Customer {
     private int age;
 
     @Column(name="phone")
-    private int quantity;
+    private int phone;
 
     @Column(name="address")
     private String address;

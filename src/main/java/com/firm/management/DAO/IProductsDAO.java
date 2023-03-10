@@ -1,6 +1,8 @@
 package com.firm.management.DAO;
 
 import com.firm.management.Entity.*;
+import com.firm.management.Request.AddAcademicProgramRequest;
+import com.firm.management.Request.AddUserRequest;
 import com.firm.management.Request.OrdersByBrandRequest;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +25,11 @@ public interface IProductsDAO {
 
     List<Products> getProductsDAO(String color);
     List<Users> getUsersByTitle(String title);
+
+    boolean addUser(Users user);
+    boolean addOrder(Orders order);
+    boolean addCustomer(Customer customer);
+    boolean addAcademicProgram(AcademicProgram academicProgram);
+    boolean addProduct(Products product);
 
 }

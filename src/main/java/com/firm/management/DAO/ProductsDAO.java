@@ -26,6 +26,7 @@ public class ProductsDAO implements IProductsDAO{
         Session session = entityManager.unwrap(Session.class);
         return session.createQuery("from Products ").getResultList();
     }
+
     @Override
     @Transactional
     public List<Users> getAllUsers() {
@@ -62,6 +63,13 @@ public class ProductsDAO implements IProductsDAO{
 
     }
     @Override
+    public boolean addAcademicProgram(AcademicProgram academicProgram) {
+            Session session = entityManager.unwrap(Session.class);
+            session.saveOrUpdate(academicProgram);
+            return  true;
+    }
+
+    @Override
     public List<Orders> getOrdersByBrand(String brandName) {
         Session session = entityManager.unwrap(Session.class);
         brandName="%"+brandName+"%";
@@ -70,6 +78,14 @@ public class ProductsDAO implements IProductsDAO{
         return  q.list();
 
     }
+    @Override
+    public boolean addOrder(Orders order) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(order);
+        return  true;
+
+    }
+
     @Override
     public List<Users> getUsersByTitle(String title) {
         Session session = entityManager.unwrap(Session.class);
@@ -80,11 +96,32 @@ public class ProductsDAO implements IProductsDAO{
     }
 
     @Override
+    public boolean addUser(Users user) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(user);
+        return  true;
+
+    }
+
+    @Override
     public List<Products> getProductsDAO(String color) {
         Session session = entityManager.unwrap(Session.class);
         Query q = session.createNativeQuery("select * from products where color=?1");
         q.setParameter(1, color);
         return  q.list();
+    }
+
+    @Override
+    public boolean addProduct(Products product) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(product);
+        return  false;
+    }
+    @Override
+    public boolean addCustomer(Customer customer) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(customer);
+        return  true;
 
     }
 

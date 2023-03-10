@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -61,10 +62,36 @@ public class MainController {
     public List<Products> productsByColor(@RequestBody ProductsByColorRequest request) {
         return productsService.getProductsByColor(request);
     }
+
     @PostMapping("/UsersByTitle")
     public List<Users> UsersByTitle(@RequestBody UsersByTitleRequest request) {
         return productsService.getUsersByTitleService(request);
     }
+    @PostMapping("/addUser")
+    public boolean addUser(@RequestBody AddUserRequest request) {
+        return productsService.addUser(request);
+    }
+
+    @PostMapping("/addOrder")
+    public boolean addOrder(@RequestBody AddOrderRequest request) {
+        return productsService.addOrder(request);
+    }
+
+    @PostMapping("/addCustomer")
+    public boolean addCustomer(@RequestBody AddCustomerRequest request) {
+        return productsService.addCustomer(request);
+    }
+
+    @PostMapping("/addAcademicProgram")
+    public boolean addAcademicProgram(@RequestBody AddAcademicProgramRequest request) {
+        return productsService.addAcademicProgram(request);
+    }
+
+    @PostMapping("/addProduct")
+    public boolean addProduct(@RequestBody AddProductRequest request) {
+        return productsService.addProduct(request);
+    }
+
     @PostMapping("/saveOrUpdateToCalendar")
     public void saveOrUpdateToCalendar(@RequestBody CalendarSaveOrUpdateRequest request) {
          productsService.saveOrUpdateToCalendar(request);

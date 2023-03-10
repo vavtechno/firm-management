@@ -71,6 +71,61 @@ public class ProductsService implements IProductsService{
 
     @Override
     @Transactional
+    public boolean addUser(AddUserRequest request) {
+        Users user = new Users();
+        user.setName(request.getName());
+        user.setSurname(request.getSurname());
+        user.setAge(request.getAge());
+        user.setTitle(request.getTitle());
+        return this.productsDAO.addUser(user);
+    }
+
+    @Override
+    @Transactional
+    public boolean addOrder(AddOrderRequest request) {
+        Orders order = new Orders();
+        order.setBrand(request.getBrand());
+        order.setType(request.getType());
+        order.setStock(request.getStock());
+        order.setCustomer(request.getCustomer());
+        return this.productsDAO.addOrder(order);
+    }
+    @Override
+    @Transactional
+    public boolean addCustomer(AddCustomerRequest request) {
+        Customer customer = new Customer();
+        customer.setName(request.getName());
+        customer.setAge(request.getAge());
+        customer.setPhone(request.getPhone());
+        customer.setAddress(request.getAddress());
+        return this.productsDAO.addCustomer(customer);
+    }
+
+    @Override
+    @Transactional
+    public boolean addAcademicProgram(AddAcademicProgramRequest request) {
+       AcademicProgram academicProgram = new AcademicProgram();
+       academicProgram.setLessons(request.getLessons());
+       academicProgram.setClasses(request.getClasses());
+       academicProgram.setHours(request.getHours());
+       academicProgram.setDays(request.getDays());
+       return this.productsDAO.addAcademicProgram(academicProgram);
+    }
+
+    @Override
+    @Transactional
+    public boolean addProduct(AddProductRequest request) {
+        Products product = new Products();
+        product.setName(request.getName());
+        product.setType(request.getType());
+        product.setQuantity(request.getQuantity());
+        product.setColor(request.getColor());
+        return this.productsDAO.addProduct(product);
+    }
+
+
+    @Override
+    @Transactional
     public void saveOrUpdateToCalendar(CalendarSaveOrUpdateRequest request) {
         AcademicProgram academicProgram = new AcademicProgram();
         academicProgram.setClasses(request.getClasses());
