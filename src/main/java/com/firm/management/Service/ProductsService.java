@@ -48,6 +48,12 @@ public class ProductsService implements IProductsService{
 
     @Override
     @Transactional
+    public List<Teachers> getAllTeachers() {
+        return this.productsDAO.getAllTeachers();
+    }
+
+    @Override
+    @Transactional
     public List<AcademicProgram> getAcademicProgramByClassService(AcademicProgramByIdRequest request) {
         return this.productsDAO.getAcademicProgramByClassDAO(request.getClassCode());
     }
@@ -69,6 +75,11 @@ public class ProductsService implements IProductsService{
         return this.productsDAO.getUsersByTitle(request.getTitle());
     }
 
+    @Override
+    @Transactional
+    public List<Teachers> getTeachersByBranchService(TeachersByBranchRequest request) {
+        return this.productsDAO.getTeachersByBranch(request.getBranch());
+    }
     @Override
     @Transactional
     public boolean addUser(AddUserRequest request) {
@@ -122,6 +133,48 @@ public class ProductsService implements IProductsService{
         product.setColor(request.getColor());
         return this.productsDAO.addProduct(product);
     }
+    @Override
+    @Transactional
+    public boolean addTeacher(AddTeachersRequest request) {
+        Teachers teacher = new Teachers();
+        teacher.setName(request.getName());
+        teacher.setSurname(request.getSurname());
+        teacher.setPhone(request.getPhone());
+        teacher.setBranch(request.getBranch());
+        return this.productsDAO.addTeacher(teacher);
+    }
+
+    @Override
+    @Transactional
+    public String  deleteTeachersByPhone(DeleteTeachersByPhoneRequest request) {
+        return this.productsDAO.deleteTeachersByPhone(request.getPhone());
+    }
+    @Override
+    @Transactional
+    public String deleteProductById(DeleteProductByIdRequest request) {
+        return this.productsDAO.deleteProductById(request.getId());
+    }
+
+    @Override
+    @Transactional
+    public String  deleteUsersByAge(DeleteUsersByAgeRequest request) {
+        return this.productsDAO.deleteUsersByAge(request.getAge());
+    }
+    @Override
+    @Transactional
+    public String deleteOrdersByBrand(DeleteOrdersByBrandRequest request) {
+        return this.productsDAO.deleteOrdersByBrand(request.getBrand());
+    }
+    @Override
+    @Transactional
+    public String deleteCustomerByAddress(DeleteCustomerByAddress request) {
+        return this.productsDAO.deleteCustomerByAddress(request.getAddress());
+    }
+    @Override
+    @Transactional
+    public String deleteAcademicProgramByLessons(DeleteAcademicProgramByLessons request) {
+        return this.productsDAO.deleteAcademicProgramByLessons(request.getLessons());
+    }
 
 
     @Override
@@ -152,9 +205,4 @@ public class ProductsService implements IProductsService{
         this.productsDAO.update(product);
     }
 
-    @Override
-    @Transactional
-    public void delete(String  id) {
-        this.productsDAO.deleteById(id);
-    }
 }

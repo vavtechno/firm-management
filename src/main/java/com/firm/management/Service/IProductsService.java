@@ -13,6 +13,7 @@ public interface IProductsService {
     List<Customer> getAllCustomer();
     List<Orders> getAllOrders();
     List<AcademicProgram> getAllAcademicProgram();
+    List<Teachers> getAllTeachers();
 
     void saveOrUpdateToCalendar(CalendarSaveOrUpdateRequest request);
 
@@ -20,16 +21,24 @@ public interface IProductsService {
 
     void update(Products product);
 
-    void delete(String id);
 
     List<AcademicProgram> getAcademicProgramByClassService(AcademicProgramByIdRequest request);
     List<Orders> getOrdersByBrandService(OrdersByBrandRequest request);
     List<Products> getProductsByColor(ProductsByColorRequest request);
     List<Users> getUsersByTitleService(UsersByTitleRequest request);
+    List<Teachers> getTeachersByBranchService(TeachersByBranchRequest request);
 
     boolean addUser(AddUserRequest request);
     boolean addOrder(AddOrderRequest request);
     boolean addCustomer(AddCustomerRequest request);
     boolean addAcademicProgram(AddAcademicProgramRequest request);
     boolean addProduct(AddProductRequest request);
+    boolean addTeacher(AddTeachersRequest request);
+
+    String deleteTeachersByPhone(DeleteTeachersByPhoneRequest request);
+    String deleteProductById(DeleteProductByIdRequest request);
+    String deleteUsersByAge(DeleteUsersByAgeRequest request);
+    String deleteOrdersByBrand(DeleteOrdersByBrandRequest request);
+    String deleteCustomerByAddress(DeleteCustomerByAddress request);
+    String deleteAcademicProgramByLessons(DeleteAcademicProgramByLessons request);
 }

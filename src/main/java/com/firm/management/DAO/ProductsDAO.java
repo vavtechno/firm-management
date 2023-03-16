@@ -1,6 +1,7 @@
 package com.firm.management.DAO;
 
 import com.firm.management.Entity.*;
+import com.firm.management.Request.TeachersByBranchRequest;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,31 @@ public class ProductsDAO implements IProductsDAO{
     }
 
     @Override
+    @Transactional
+    public List<Teachers> getAllTeachers() {
+        Session session = entityManager.unwrap(Session.class);
+        return session.createQuery("from Teachers").getResultList();
+    }
+
+    @Override
+    public List<Teachers> getTeachersByBranch(String branchName) {
+        Session session = entityManager.unwrap(Session.class);
+        branchName="%"+branchName+"%";
+        Query q = session.createNativeQuery("select * from teachers where branch like ?1");
+        q.setParameter(1, branchName);
+        return  q.list();
+
+    }
+
+    @Override
+    public boolean addTeacher(Teachers teacher) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(teacher);
+        return  false;
+
+    }
+
+    @Override
     public List<AcademicProgram> getAcademicProgramByClassDAO(String classCode) {
         Session session = entityManager.unwrap(Session.class);
         Query q = session.createNativeQuery("select * from academic_program where classes=?1");
@@ -62,6 +88,7 @@ public class ProductsDAO implements IProductsDAO{
         return  q.list();
 
     }
+
     @Override
     public boolean addAcademicProgram(AcademicProgram academicProgram) {
             Session session = entityManager.unwrap(Session.class);
@@ -111,6 +138,8 @@ public class ProductsDAO implements IProductsDAO{
         return  q.list();
     }
 
+
+
     @Override
     public boolean addProduct(Products product) {
         Session session = entityManager.unwrap(Session.class);
@@ -122,7 +151,57 @@ public class ProductsDAO implements IProductsDAO{
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(customer);
         return  true;
+    }
 
+    @Override
+    public String  deleteProductById(String id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM products WHERE id=?1");
+        q.setParameter(1, id);
+        q.executeUpdate();
+        return id + "li kayıt silindi.";
+    }
+
+    @Override
+    public String  deleteUsersByAge(int age) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM users WHERE age=?1");
+        q.setParameter(1, age);
+        q.executeUpdate();
+        return age + "yasindakiler silindi";
+    }
+    @Override
+    public String  deleteOrdersByBrand(String brand) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM orders WHERE brand=?1");
+        q.setParameter(1, brand);
+        q.executeUpdate();
+        return brand + " Marka ürünler silindi";
+    }
+    @Override
+    public String  deleteCustomerByAddress(String address) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM customer WHERE address=?1");
+        q.setParameter(1, address);
+        q.executeUpdate();
+        return address + " Sehrindekiler silindi";
+    }
+    @Override
+    public String  deleteAcademicProgramByLessons(String lessons) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM academic_program WHERE lessons=?1");
+        q.setParameter(1, lessons);
+        q.executeUpdate();
+        return lessons + " isimli dersler silindi";
+    }
+
+    @Override
+    public String  deleteTeachersByPhone(int phone) {
+        Session session = entityManager.unwrap(Session.class);
+        Query q = session.createNativeQuery("DELETE FROM teachers WHERE phone=?1");
+        q.setParameter(1, phone);
+        q.executeUpdate();
+        return phone + "  bu telefon numaralari silindi";
     }
 
     @Override
@@ -144,7 +223,6 @@ public class ProductsDAO implements IProductsDAO{
         } catch (Exception e) {
 
         }
-
     }
 
     @Override
@@ -152,11 +230,4 @@ public class ProductsDAO implements IProductsDAO{
 
     }
 
-    @Override
-    public void deleteById(String id) {
-        Session session = entityManager.unwrap(Session.class);
-        Query q = session.createNativeQuery("delete from Products where id =?1");
-        q.setParameter(1,id);
-        q.executeUpdate();
-    }
 }

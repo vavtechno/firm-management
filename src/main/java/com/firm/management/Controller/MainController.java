@@ -26,6 +26,7 @@ public class MainController {
     public List<Products> products() {
         return productsService.getAllProducts();
     }
+
     @GetMapping("/users")
     public List<Users> users() {
         return productsService.getAllUsers();
@@ -40,11 +41,16 @@ public class MainController {
     public List<Orders> orders() {
         return productsService.getAllOrders();
     }
-    
+
 
     @GetMapping("/academic_program")
     public List<AcademicProgram> academic_program() {
         return productsService.getAllAcademicProgram();
+    }
+
+    @GetMapping("/teachers")
+    public List<Teachers> teachers() {
+        return productsService.getAllTeachers();
     }
 
 
@@ -67,6 +73,12 @@ public class MainController {
     public List<Users> UsersByTitle(@RequestBody UsersByTitleRequest request) {
         return productsService.getUsersByTitleService(request);
     }
+
+    @PostMapping("/TeachersByBranch")
+    public List<Teachers> TeachersByBranch(@RequestBody TeachersByBranchRequest request) {
+        return productsService.getTeachersByBranchService(request);
+    }
+
     @PostMapping("/addUser")
     public boolean addUser(@RequestBody AddUserRequest request) {
         return productsService.addUser(request);
@@ -91,10 +103,43 @@ public class MainController {
     public boolean addProduct(@RequestBody AddProductRequest request) {
         return productsService.addProduct(request);
     }
+    @PostMapping("/addTeachers")
+    public boolean addTeachers(@RequestBody AddTeachersRequest request) {
+        return productsService.addTeacher(request);
+    }
+
+
+
+    @PostMapping("/deleteTeachersByPhone")
+    public String deleteTeachersByPhone(@RequestBody DeleteTeachersByPhoneRequest request) {
+        return productsService.deleteTeachersByPhone(request);
+    }
+    @PostMapping("/deleteProductById")
+    public String deleteProductById(@RequestBody DeleteProductByIdRequest request) {
+        return productsService.deleteProductById(request);
+    }
+
+    @PostMapping("/deleteUsersByAge")
+    public String deleteUsersByAge(@RequestBody DeleteUsersByAgeRequest request) {
+        return productsService.deleteUsersByAge(request);
+    }
+    @PostMapping("/deleteOrdersByBrand")
+    public String deleteOrdersByBrand(@RequestBody DeleteOrdersByBrandRequest request) {
+        return productsService.deleteOrdersByBrand(request);
+    }
+
+    @PostMapping("/deleteCustomerByAddress")
+    public String deleteCustomerByAddress(@RequestBody DeleteCustomerByAddress request) {
+        return productsService.deleteCustomerByAddress(request);
+    }
+    @PostMapping("/deleteAcademicProgramByLessons")
+    public String deleteAcademicProgramByLessons(@RequestBody DeleteAcademicProgramByLessons request) {
+        return productsService.deleteAcademicProgramByLessons(request);
+    }
 
     @PostMapping("/saveOrUpdateToCalendar")
     public void saveOrUpdateToCalendar(@RequestBody CalendarSaveOrUpdateRequest request) {
-         productsService.saveOrUpdateToCalendar(request);
+        productsService.saveOrUpdateToCalendar(request);
     }
 
     @PostMapping("/saveOrUpdate")
@@ -102,11 +147,5 @@ public class MainController {
         productsService.saveOrUpdate(request);
     }
 
-
-
-    @GetMapping("/deleteById/{id}")
-    public void saveOrUpdate(@PathVariable String id) {
-        productsService.delete(id);
-    }
 
 }

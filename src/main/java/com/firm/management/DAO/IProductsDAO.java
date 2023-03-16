@@ -15,9 +15,9 @@ public interface IProductsDAO {
     List<Customer> getAllCustomer();
     List<Orders> getAllOrders();
     List<AcademicProgram> getAllAcademicProgram();
+    List<Teachers> getAllTeachers();
     void saveOrUpdate(Products product);
     void update(Products product);
-    void deleteById(String  id);
     void saveOrUpdateToCalendar(AcademicProgram program);
 
     List<AcademicProgram> getAcademicProgramByClassDAO(String classCode);
@@ -25,11 +25,19 @@ public interface IProductsDAO {
 
     List<Products> getProductsDAO(String color);
     List<Users> getUsersByTitle(String title);
+    List<Teachers> getTeachersByBranch(String branch);
 
     boolean addUser(Users user);
     boolean addOrder(Orders order);
     boolean addCustomer(Customer customer);
     boolean addAcademicProgram(AcademicProgram academicProgram);
     boolean addProduct(Products product);
+    boolean addTeacher(Teachers teacher);
 
+    String deleteProductById(String id);
+    String  deleteUsersByAge(int age);
+    String deleteOrdersByBrand(String brand);
+    String deleteCustomerByAddress(String address);
+    String deleteAcademicProgramByLessons(String lessons);
+    String  deleteTeachersByPhone(int phone);
 }
